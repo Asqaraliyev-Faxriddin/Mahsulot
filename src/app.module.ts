@@ -12,7 +12,7 @@ import { ProductModule } from './modules/product/product.module';
   imports: [
 
    
-
+ 
     PrismaModule ,AuthModule,VerificationModule,UserModule, 
  SeaderModule,RedisModule, ProductModule, 
     
