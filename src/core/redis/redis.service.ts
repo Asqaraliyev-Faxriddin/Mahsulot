@@ -8,7 +8,7 @@ export class RedisService implements OnModuleInit {
   async onModuleInit() {
    
 
-    this.client = new Redis(); 
+    this.client = new Redis(process.env.Redis_url as string); 
   }
 
   async set(key: string, value: string, seconds: number) {
