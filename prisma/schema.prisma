@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  MENTOR
+  ASSISTANT
+  STUDENT
+}
+
+
+model Users {
+  id        String    @id @default(uuid())
+  phone     String    @unique
+  password  String
+  role      UserRole  @default(STUDENT)
+  fullName  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  products  Product[]  
+
+  @@map("users")
+}
+
+  model Product {
+    id             Int       @id @default(autoincrement())
+    kimga String 
+    nom            String
+    tavsif         String?
+    narx           Float
+    miqdor         Int
+    jamiNarx       Float?
+    yaratilgan_vaqti DateTime @default(now())
+    sotildimi Boolean @default(false)
+    userId         String   
+    user           Users    @relation(fields: [userId], references: [id])
+
+    @@map("products")
+  }
+
+
+
+
+
+
