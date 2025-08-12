@@ -3,19 +3,10 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { TelegramInterceptor } from './common/interceptors/bot.intervertors';
-import * as fs from "fs"
 
 async function bootstrap() {
-  
+  const app = await NestFactory.create(AppModule,{cors:true});
 
-  const httpsOptions = {
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.crt'),
-  };
-
-  const app = await NestFactory.create(AppModule, {
-    httpsOptions,
-  });
   app.enableCors()
   
   app.useGlobalPipes(new ValidationPipe({
